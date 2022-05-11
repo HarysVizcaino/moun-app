@@ -1,0 +1,9 @@
+.component {
+  background-color: red;
+}
+
+.gredItemContainer {
+  display: flex;
+  justify-content: center;
+  padding: 19px;
+}

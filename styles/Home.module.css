@@ -2,6 +2,26 @@
   padding: 0 2rem;
 }
 
+.movieContainerList {
+  background-color: #f4f5f7;
+}
+
+.homeDivier {
+  background-color: #f4f5f7;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeDivier p {
+  color: #263238;
+  font-size: 2.5rem;
+  max-width: 750px;
+  white-space: unset;
+  margin-bottom: 40px;
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;

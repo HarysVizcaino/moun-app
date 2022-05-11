@@ -1,0 +1,76 @@
+.parimaryHeader {
+  top: 0px;
+  width: 100%;
+  height: 4.5rem;
+  padding: 8px 0px;
+  z-index: 1100;
+  position: fixed;
+  box-shadow: rgb(38 50 56 / 15%) 0px 4px 15px;
+  background-color: white;
+}
+
+.menuContainer {
+  height: fit-content;
+  margin: 0 auto;
+  display: flex;
+  padding: 0px 16px;
+  z-index: 1100;
+  position: relative;
+  max-width: 1280px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuItemsContainer {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.menuOptionButtonContainer {
+  flex: 0 0 auto;
+  height: 100%;
+  padding: 8px;
+}
+
+.menuItemContainer {
+  flex: 0 0 auto;
+  height: 100%;
+  padding: 8px;
+  background: white;
+  display: flex;
+  flex-grow: 0;
+  margin-right: 24px;
+  justify-content: center;
+  max-height: 52px;
+}
+
+.menuItemContainer a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem !important;
+}
+
+.menuButtonContainer {
+  display: flex;
+}
+
+.buttonAccount {
+  flex: 0 0 auto;
+  height: 100%;
+  padding: 8px;
+}
+
+.buttonAccount a {
+  font-size: 0.875rem !important;
+  border: solid 1px #ff452b;
+  color: #ff452b;
+  padding: 6px 32px;
+  border-radius: 50px;
+}
