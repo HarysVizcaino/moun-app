@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { MainAppMessage } from '../models/message-model';
+import en from '../translations/en';
 import es from '../translations/es';
 
 export interface IInternationalization {
@@ -8,14 +9,11 @@ export interface IInternationalization {
 
 export interface IIntContext {
   language: MainAppMessage;
-  handleLanguage: (language: string) => void;
+  handleLanguage?: (language: string) => void;
 }
 
 const initialValue: IIntContext = {
   language: es,
-  handleLanguage: () => {
-    console.log('THIONE');
-  },
 };
 
 export const IntContext = React.createContext<IIntContext>(initialValue);
@@ -23,18 +21,28 @@ export const IntContext = React.createContext<IIntContext>(initialValue);
 const Internationalization: React.FC<IInternationalization> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState(es);
-  useEffect(() => {}, []);
+  const [values, setValues] = useState({
+    language: es,
+    handleLanguage: (value: string) => {},
+  });
 
   const changeLanguage = (language: string) => {
     console.log('CHANGIN', language);
   };
 
+  useEffect(() => {
+    console.log('The Effect');
+    setValues({
+      language: en,
+      handleLanguage: changeLanguage,
+    });
+  }, []);
+
   return (
     <>
       <IntContext.Provider
         value={{
-          language,
+          language: values.language,
           handleLanguage: changeLanguage,
         }}
       >

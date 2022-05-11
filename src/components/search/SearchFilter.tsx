@@ -53,7 +53,7 @@ const SearchFilter: React.FC<ISearchFilter> = () => {
           </Grid>
           <Grid item lg={4}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Año</InputLabel>
+              <InputLabel id="demo-simple-select-label">Gategoria</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"

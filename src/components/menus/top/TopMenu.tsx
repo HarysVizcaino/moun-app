@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { useContext } from 'react';
 import profilePic from '../../../../public/mounLogo.png';
+import { IntContext } from '../../../data-components/Internationalization';
 import styles from './TopMenu.module.css';
 
 export interface ITopMenu {
@@ -13,6 +15,9 @@ export interface MenuItem {
 }
 
 const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
+  const Intern = useContext(IntContext);
+  const { handleLanguage } = Intern;
+  console.log({ Intern });
   return (
     <nav className={styles.parimaryHeader}>
       <div className={styles.menuContainer}>
@@ -36,9 +41,13 @@ const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
               </Link>
             </div>
             <div className={styles.buttonAccount}>
-              <Link href={'/'}>
+              <button
+                onClick={() => {
+                  handleLanguage && handleLanguage('en');
+                }}
+              >
                 <a>Spanish</a>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
