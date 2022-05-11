@@ -4,40 +4,45 @@ import HomeSearch from '../src/components/home/Search/HomeSearch';
 import PrimaryLayout from '../src/components/layouts/primary/PrimaryLayout';
 import MovieList from '../src/components/MovieList/MovieList';
 import { IntContext } from '../src/data-components/Internationalization';
-import { getTrendingMovies } from '../src/lib/api';
+import { MovieContext } from '../src/data-components/movieDataComponent';
 import { movieModel } from '../src/models/movie-model';
 import styles from '../styles/Home.module.css';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
-  console.log(process.env.NEXT_PUBLIC_API_URL);
-  const [totalPage, setTotalPage] = useState<number>();
+  const [selectedGenre, setSelectedGenre] = useState();
   const [movies, setMovies] = useState<movieModel[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const int = useContext(IntContext);
-  const { language, handleLanguage } = int;
-  console.log({ int });
+  const movieContext = useContext(MovieContext);
 
-  const fetchData = async () => {
-    const response = await getTrendingMovies(pageNumber);
-    setMovies(response.results);
-    setTotalPage(response.total_pages);
+  const { language } = int;
+  const { actions, moviesList, totalPages } = movieContext;
+  const { getTrendingMoviesAction, loadMoreMoviesAction } = actions;
+  const { homePage } = language;
+
+  const loadMoreItems = async () => {
+    loadMoreMoviesAction(language.id);
   };
 
   useEffect(() => {
-    fetchData();
-  }, [pageNumber]);
+    getTrendingMoviesAction(pageNumber, language.id);
+  }, [language.id]);
 
-  console.log(totalPage);
   return (
     <Grid container>
       <HomeSearch />
       <Grid item lg={12} className={styles.homeDivier}>
-        <p>Descubre los ultimos extrenos</p>
+        <p>{homePage.listTitle}</p>
       </Grid>
       <Grid item lg={12} className={styles.movieContainerList}>
-        <MovieList items={movies} />
+        <MovieList
+          loading={loading}
+          items={moviesList}
+          loadMoreItems={loadMoreItems}
+        />
       </Grid>
     </Grid>
   );

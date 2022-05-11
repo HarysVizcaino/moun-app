@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { MainAppMessage } from '../models/message-model';
 import en from '../translations/en';
 import es from '../translations/es';
@@ -9,45 +9,38 @@ export interface IInternationalization {
 
 export interface IIntContext {
   language: MainAppMessage;
-  handleLanguage?: (language: string) => void;
+  handleLanguage: (language: string) => void;
 }
 
 const initialValue: IIntContext = {
   language: es,
+  handleLanguage: () => {},
 };
 
-export const IntContext = React.createContext<IIntContext>(initialValue);
+export const IntContext = React.createContext<IIntContext | null>(initialValue);
 
 const Internationalization: React.FC<IInternationalization> = ({
   children,
 }) => {
-  const [values, setValues] = useState({
-    language: es,
-    handleLanguage: (value: string) => {},
-  });
+  const [values, setValues] = useState(es);
 
   const changeLanguage = (language: string) => {
     console.log('CHANGIN', language);
+    if (language === 'es') {
+      setValues(es);
+    } else if (language === 'en') {
+      setValues(en);
+    }
   };
 
-  useEffect(() => {
-    console.log('The Effect');
-    setValues({
-      language: en,
-      handleLanguage: changeLanguage,
-    });
-  }, []);
+  const valuesCtx: IIntContext = {
+    language: values,
+    handleLanguage: changeLanguage,
+  };
 
   return (
     <>
-      <IntContext.Provider
-        value={{
-          language: values.language,
-          handleLanguage: changeLanguage,
-        }}
-      >
-        {children}
-      </IntContext.Provider>
+      <IntContext.Provider value={valuesCtx}>{children}</IntContext.Provider>
     </>
   );
 };

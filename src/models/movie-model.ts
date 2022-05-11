@@ -1,5 +1,6 @@
 export interface movieModel {
   id: number;
+  name?: string;
   vote_average: number;
   overview: string;
   release_date: string;

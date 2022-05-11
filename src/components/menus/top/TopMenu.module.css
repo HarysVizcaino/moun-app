@@ -67,10 +67,12 @@
   padding: 8px;
 }
 
-.buttonAccount a {
+.buttonAccount button {
   font-size: 0.875rem !important;
   border: solid 1px #ff452b;
   color: #ff452b;
   padding: 6px 32px;
   border-radius: 50px;
+  background: none;
+  cursor: pointer;
 }

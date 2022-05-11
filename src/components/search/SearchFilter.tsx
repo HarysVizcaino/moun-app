@@ -1,13 +1,30 @@
 import { Grid } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import React, { useEffect, useState } from 'react';
+import { getGenre } from '../../lib/api';
+import { genreModel } from '../../models/genre-model';
 import styles from './SearchFilter.module.css';
 
-export interface ISearchFilter {}
+export interface ISearchFilter {
+  fetchByGender: (item: genreModel) => void;
+}
 
-const SearchFilter: React.FC<ISearchFilter> = () => {
+const SearchFilter: React.FC<ISearchFilter> = ({ fetchByGender }) => {
+  const [genreList, setGenreList] = useState<genreModel[]>([]);
+  const getGenreList = async () => {
+    const response = await getGenre(1);
+    setGenreList(response.genres);
+  };
+
+  useEffect(() => {
+    getGenreList();
+  }, []);
+
   return (
     <Grid container className={styles.searchContainer}>
       <Grid item lg={12}>
@@ -17,20 +34,22 @@ const SearchFilter: React.FC<ISearchFilter> = () => {
         <Grid container spacing={5}>
           <Grid item lg={4}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Autor</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={5}
-                label="Age"
-                onChange={(item) => {
-                  console.log({ item });
-                }}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
+              {genreList.length && (
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={genreList}
+                  getOptionLabel={(option) => option.name}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Genero" />
+                  )}
+                  onChange={(_event, genre) => {
+                    console.log(genre);
+                    fetchByGender(genre);
+                  }}
+                />
+              )}
             </FormControl>
           </Grid>
           <Grid item lg={4}>

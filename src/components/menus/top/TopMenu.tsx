@@ -5,9 +5,7 @@ import profilePic from '../../../../public/mounLogo.png';
 import { IntContext } from '../../../data-components/Internationalization';
 import styles from './TopMenu.module.css';
 
-export interface ITopMenu {
-  menuItems: MenuItem[];
-}
+export interface ITopMenu {}
 
 export interface MenuItem {
   label: string;
@@ -16,8 +14,18 @@ export interface MenuItem {
 
 const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
   const Intern = useContext(IntContext);
-  const { handleLanguage } = Intern;
-  console.log({ Intern });
+  const { language, handleLanguage } = Intern;
+  const { rightMenu, menu } = language;
+  const items: MenuItem[] = [
+    {
+      label: menu.home,
+      to: '/',
+    },
+    {
+      label: menu.search,
+      to: '/search',
+    },
+  ];
   return (
     <nav className={styles.parimaryHeader}>
       <div className={styles.menuContainer}>
@@ -25,7 +33,7 @@ const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
           <div className={styles.menuItemContainer}>
             <Image src={profilePic} />
           </div>
-          {menuItems.map(({ label, to }) => (
+          {items.map(({ label, to }) => (
             <div className={styles.menuItemContainer} key={to}>
               <Link href={to}>
                 <a>{label}</a>
@@ -36,17 +44,21 @@ const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
         <div className={styles.menuOptionButtonContainer}>
           <div className={styles.menuButtonContainer}>
             <div className={styles.buttonAccount}>
-              <Link href={'/'}>
-                <a>English</a>
-              </Link>
-            </div>
-            <div className={styles.buttonAccount}>
               <button
                 onClick={() => {
                   handleLanguage && handleLanguage('en');
                 }}
               >
-                <a>Spanish</a>
+                <a>{rightMenu.english}</a>
+              </button>
+            </div>
+            <div className={styles.buttonAccount}>
+              <button
+                onClick={() => {
+                  handleLanguage && handleLanguage('es');
+                }}
+              >
+                <a>{rightMenu.spanish}</a>
               </button>
             </div>
           </div>
