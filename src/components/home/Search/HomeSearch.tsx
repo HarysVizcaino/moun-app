@@ -13,7 +13,7 @@ const HomeSearch: React.FC<IHomeSearch> = () => {
   const { homePage } = language;
   return (
     <Grid container>
-      <Grid item lg={6}>
+      <Grid item lg={6} sm={12}>
         <Grid className={styles.searchSectionContainer}>
           <p className={styles.movieSearchMainText}>{homePage.main}</p>
         </Grid>
@@ -21,7 +21,7 @@ const HomeSearch: React.FC<IHomeSearch> = () => {
           <MovieSearch />
         </Grid>
       </Grid>
-      <Grid item lg={6}>
+      <Grid item lg={6} sm={12}>
         <span className={styles.searchSectionContainer}>
           <Image src={doctor} />
         </span>

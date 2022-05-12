@@ -34,10 +34,10 @@ const Home: NextPageWithLayout = () => {
   return (
     <Grid container>
       <HomeSearch />
-      <Grid item lg={12} className={styles.homeDivier}>
+      <Grid item lg={12} sm={12} xs={12} className={styles.homeDivier}>
         <p>{homePage.listTitle}</p>
       </Grid>
-      <Grid item lg={12} className={styles.movieContainerList}>
+      <Grid item lg={12} sm={12} xs={12} className={styles.movieContainerList}>
         <MovieList
           loading={loading}
           items={moviesList}

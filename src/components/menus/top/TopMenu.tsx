@@ -1,3 +1,8 @@
+import MenuIcon from '@mui/icons-material/Menu';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext } from 'react';
@@ -20,10 +25,6 @@ const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
     {
       label: menu.home,
       to: '/',
-    },
-    {
-      label: menu.search,
-      to: '/search',
     },
   ];
   return (
@@ -64,6 +65,50 @@ const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
           </div>
         </div>
       </div>
+
+      {/* MOVILE MENU */}
+      <div className={styles.menuMobileContainer}>
+        <div className={styles.menuItemsContainer}>
+          <div className={styles.menuItemContainer}>
+            <Image src={profilePic} />
+          </div>
+        </div>
+        <div>
+          <PopupState variant="popover" popupId="demo-popup-menu">
+            {(popupState) => (
+              <React.Fragment>
+                <Button
+                  className={styles.movileMenuButton}
+                  variant="contained"
+                  {...bindTrigger(popupState)}
+                >
+                  <MenuIcon color="action" />
+                </Button>
+                <Menu {...bindMenu(popupState)}>
+                  <MenuItem
+                    onClick={() => {
+                      handleLanguage && handleLanguage('es');
+                      popupState.close();
+                    }}
+                  >
+                    {rightMenu.spanish}
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleLanguage && handleLanguage('en');
+                      popupState.close();
+                    }}
+                  >
+                    {rightMenu.english}
+                  </MenuItem>
+                </Menu>
+              </React.Fragment>
+            )}
+          </PopupState>
+        </div>
+      </div>
+
+      {/* MOVILE MENU */}
     </nav>
   );
 };
