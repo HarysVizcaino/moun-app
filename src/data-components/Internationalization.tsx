@@ -17,7 +17,7 @@ const initialValue: IIntContext = {
   handleLanguage: () => {},
 };
 
-export const IntContext = React.createContext<IIntContext | null>(initialValue);
+export const IntContext = React.createContext<IIntContext>(initialValue);
 
 const Internationalization: React.FC<IInternationalization> = ({
   children,
