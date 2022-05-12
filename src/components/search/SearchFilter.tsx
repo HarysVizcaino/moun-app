@@ -5,7 +5,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { IntContext } from '../../data-components/Internationalization';
 import { getGenre } from '../../lib/api';
 import { genreModel } from '../../models/genre-model';
 import styles from './SearchFilter.module.css';
@@ -15,9 +16,11 @@ export interface ISearchFilter {
 }
 
 const SearchFilter: React.FC<ISearchFilter> = ({ fetchByGender }) => {
+  const int = useContext(IntContext);
+  const { language } = int;
   const [genreList, setGenreList] = useState<genreModel[]>([]);
   const getGenreList = async () => {
-    const response = await getGenre(1);
+    const response = await getGenre(1, language.id);
     setGenreList(response.genres);
   };
 
@@ -45,8 +48,10 @@ const SearchFilter: React.FC<ISearchFilter> = ({ fetchByGender }) => {
                     <TextField {...params} label="Genero" />
                   )}
                   onChange={(_event, genre) => {
-                    console.log(genre);
-                    fetchByGender(genre);
+                    const genreData = genre
+                      ? genre
+                      : { id: 28, name: 'action' };
+                    fetchByGender(genreData);
                   }}
                 />
               )}

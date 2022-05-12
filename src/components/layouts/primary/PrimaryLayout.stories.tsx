@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import PrimaryLayout, { IPrimaryLayout } from './PrimaryLayout';
-import { mockPrimaryLayoutProps } from './PrimaryLayout.mocks';
 
 export default {
   title: 'templates/PrimaryLayout',
@@ -14,6 +13,4 @@ const Template: ComponentStory<typeof PrimaryLayout> = (args) => (
 
 export const Base = Template.bind({});
 
-Base.args = {
-  ...mockPrimaryLayoutProps.base,
-} as IPrimaryLayout;
+Base.args = {} as IPrimaryLayout;

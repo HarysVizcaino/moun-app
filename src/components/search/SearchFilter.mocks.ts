@@ -1,7 +1,7 @@
 import { ISearchFilter } from './SearchFilter';
 
 const base: ISearchFilter = {
-  sampleTextProp: 'Hello world!',
+  fetchByGender: () => {},
 };
 
 export const mockSearchFilterProps = {

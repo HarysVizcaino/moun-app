@@ -17,7 +17,7 @@ export interface IMenuItem {
   to: string;
 }
 
-const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
+const TopMenu: React.FC<ITopMenu> = () => {
   const Intern = useContext(IntContext);
   const { language, handleLanguage } = Intern;
   const { rightMenu, menu } = language;

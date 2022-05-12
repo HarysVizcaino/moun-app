@@ -1,7 +1,8 @@
 import { IMovieList } from './MovieList';
 
 const base: IMovieList = {
-  sampleTextProp: 'Hello world!',
+  loading: false,
+  loadMoreItems: () => {},
 };
 
 export const mockMovieListProps = {
