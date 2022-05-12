@@ -48,11 +48,9 @@ const MovieDataComponent: React.FC<IMovieComponent> = ({ children }) => {
   };
 
   const getMoviesListAction = async (language: string) => {
-    console.log('THEQUERY', query);
     if (query) {
       if (moviePag < totalPages) {
         const movies = await getMovies(moviePag, language, query);
-        console.log(movies.results);
         setMovieliST(movies.results);
         setTotalPages(movies.total_pages);
         setActiveLanguage(language);
@@ -87,7 +85,6 @@ const MovieDataComponent: React.FC<IMovieComponent> = ({ children }) => {
     } else if (key === 'ORDER') {
       buildQuery = `${query}&sort_by=${value}`;
     }
-    console.log(buildQuery);
     setQuery(buildQuery);
   };
 

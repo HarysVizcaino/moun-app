@@ -37,6 +37,5 @@ export const getMovies = async (
   const movies = await api<apiResponse<movieModel>>(
     `${process.env.NEXT_PUBLIC_API_URL}/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}${queryString}&language=${language}&page=${page}`
   );
-  console.log({ movies });
   return movies;
 };

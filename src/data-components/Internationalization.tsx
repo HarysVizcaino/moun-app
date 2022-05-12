@@ -25,7 +25,6 @@ const Internationalization: React.FC<IInternationalization> = ({
   const [values, setValues] = useState(es);
 
   const changeLanguage = (language: string) => {
-    console.log('CHANGIN', language);
     if (language === 'es') {
       setValues(es);
     } else if (language === 'en') {
