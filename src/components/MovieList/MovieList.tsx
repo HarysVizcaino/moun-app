@@ -38,6 +38,7 @@ const MovieList: React.FC<IMovieList> = ({ items, loadMoreItems, loading }) => {
             {items &&
               items.map((item, index) => (
                 <Grid
+                  key={index}
                   item
                   lg={3}
                   sm={12}

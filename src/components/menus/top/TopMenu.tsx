@@ -12,7 +12,7 @@ import styles from './TopMenu.module.css';
 
 export interface ITopMenu {}
 
-export interface MenuItem {
+export interface IMenuItem {
   label: string;
   to: string;
 }
@@ -21,7 +21,7 @@ const TopMenu: React.FC<ITopMenu> = ({ menuItems }) => {
   const Intern = useContext(IntContext);
   const { language, handleLanguage } = Intern;
   const { rightMenu, menu } = language;
-  const items: MenuItem[] = [
+  const items: IMenuItem[] = [
     {
       label: menu.home,
       to: '/',
